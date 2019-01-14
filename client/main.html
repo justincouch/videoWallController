@@ -1,0 +1,153 @@
+<head>
+  <title>Video Wall</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
+
+<template name="videoWall">
+  {{>rainbowShader}}
+  <div class="videoWall-container">
+    <!-- <video src="/videos/4458-apicalGut.mp4" autoplay loop></video>
+    <video src="/videos/TestSequence.mp4" autoplay loop></video> -->
+    <!-- <iframe id="inlineFrameExample"
+        title="Inline Frame Example"
+        width="100%"
+        height="100%"
+        src="http://www.justincouchdesign.com/">
+    </iframe> -->
+  </div>
+  {{modes}}
+  {{tweets}}
+</template>
+
+<template name="rainbowShader">
+  <script id="vshader" type="x-shader/x-vertex">
+  		precision highp float;
+  		uniform mat4 modelViewMatrix;
+  		uniform mat4 projectionMatrix;
+  		uniform float time;
+  		attribute vec3 position;
+  		attribute vec2 uv;
+  		attribute vec3 translate;
+  		varying vec2 vUv;
+  		varying float vScale;
+  		void main() {
+  			vec4 mvPosition = modelViewMatrix * vec4( translate, 1.0 );
+  			vec3 trTime = vec3(translate.x + time,translate.y + time,translate.z + time);
+  			float scale =  sin( trTime.x * 0.8 ) + sin( trTime.y * 1.1 ) + sin( trTime.z * 0.5 );
+  			vScale = scale;
+  			scale = scale * 10.0 + 10.0;
+  			mvPosition.xyz += position * scale;
+  			vUv = uv;
+  			gl_Position = projectionMatrix * mvPosition;
+  		}
+  	</script>
+  	<script id="fshader" type="x-shader/x-fragment">
+  		precision highp float;
+  		uniform sampler2D map;
+  		varying vec2 vUv;
+  		varying float vScale;
+  		// HSL to RGB Convertion helpers
+  		vec3 HUEtoRGB(float H){
+  			H = mod(H,1.0);
+  			float R = abs(H * 6.0 - 3.0) - 1.0;
+  			float G = 2.0 - abs(H * 6.0 - 2.0);
+  			float B = 2.0 - abs(H * 6.0 - 4.0);
+  			return clamp(vec3(R,G,B),0.0,1.0);
+  		}
+  		vec3 HSLtoRGB(vec3 HSL){
+  			vec3 RGB = HUEtoRGB(HSL.x);
+  			float C = (1.0 - abs(2.0 * HSL.z - 1.0)) * HSL.y;
+  			return (RGB - 0.5) * C + HSL.z;
+  		}
+  		void main() {
+  			vec4 diffuseColor = texture2D( map, vUv );
+  			gl_FragColor = vec4( diffuseColor.xyz * HSLtoRGB(vec3(vScale/5.0, 1.0, 0.5)), diffuseColor.w );
+  			if ( diffuseColor.w < 0.5 ) discard;
+  		}
+  	</script>
+</template>
+
+<template name="videoWallController">
+  <div class="modes-container">
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="modes-container col-xs-3" style="overflow:scroll;">
+        <div class="row">
+          <div class="col-xs-12 woz-title">
+            <h5>Video Wall Modes</h5>
+          </div>
+          <div class="col-xs-12 mode-button-container">
+            <div id="BLACK-button" class="mode-button" data-modename="BLACK">
+              Black
+            </div>
+          </div>
+          <!-- <div class="col-xs-12 mode-button-container">
+            <div id="RED-button" class="mode-button" data-modename="RED">
+              Red
+            </div>
+          </div> -->
+
+          <div class="col-xs-12 mode-button-container">
+            <div id="RAINBOW-button" class="mode-button" data-modename="RAINBOW">
+              Rainbow Dots
+            </div>
+          </div>
+          <div class="col-xs-12 mode-button-container">
+            <div id="UNSPLASH-button" class="mode-button" data-modename="UNSPLASH">
+              Unsplash Images
+            </div>
+          </div>
+          <!-- <div class="col-xs-12 mode-button-container">
+            <div id="THREE-button" class="mode-button" data-modename="THREE">
+              Three
+            </div>
+          </div> -->
+
+          <div class="col-xs-12 mode-button-container">
+            <div id="TWEET_WALL-button" class="mode-button" data-modename="TWEET_WALL">
+              TWEET_WALL
+            </div>
+          </div>
+          <!-- <div class="col-xs-12 mode-button-container">
+            <div id="WEBSITE-button" class="mode-button" data-modename="WEBSITE">
+              WEBSITE
+            </div>
+          </div> -->
+          <div class="col-xs-12 mode-button-container">
+            <div id="VIDEOS-button" class="mode-button" data-modename="VIDEOS">
+              VIDEOS
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+      </div>
+      <div class="extra-container col-xs-9">
+
+      </div>
+    </div>
+  </div>
+
+  {{modes}}
+</template>

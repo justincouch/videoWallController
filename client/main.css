@@ -1,0 +1,179 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Human Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 12px;
+}
+
+.tweetWall-container{
+  max-width: none;
+}
+
+input[type="submit"]{
+  padding: .5rem 2.4rem;
+  background: #EF6530;
+  color: #FFF;
+  border-radius: 2rem;
+  font-size: 1rem;
+  border: none;
+  margin: 2rem;
+}
+
+
+/* body {
+  position: relative;
+  font-family: "Human Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 12px;
+  width: 100%;
+  background-color: #000000;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 20px;
+  overflow: hidden;
+} */
+
+.videoWall-container{
+  background-color: rgba(200,0,0,0.5);
+  width: 100vw;
+  height: 100vh;
+}
+
+video{
+  width: 100%;
+  height: auto;
+}
+
+.unsplash-container{
+  position: absolute;
+  top: 0vh;
+  left: 0px;
+  width: 100vw;
+}
+.unsplash-container img{
+  width: 100%;
+}
+
+.mode-button{
+  background-color: #eee;
+  padding: 5px;
+  margin: 5px;
+}
+
+.mode-button.active{
+  background-color: lightgreen;
+}
+
+.mode-button-container{
+  background-color: white;
+}
+
+.mode-button-container.active{
+  background-color: gray;
+}
+
+
+#vis{
+  margin-top: 60px;
+}
+
+#tweet_search_terms_text{
+  width:100%;
+  text-align: center;
+  padding-top: 20px;
+}
+
+
+
+
+
+@font-face {
+  font-family: "Human Sans";
+  src: url("fonts/Human Sans/HumanSans-ExtraLight.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Human Sans";
+  src: url("fonts/Human Sans/HumanSans-ExtraLightOblique.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Human Sans";
+  src: url("fonts/Human Sans/HumanSans-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Human Sans";
+  src: url("fonts/Human Sans/HumanSans-BoldOblique.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+/* #presets a { border-left: solid #666 1px; padding: 0 10px; }
+#presets a.first { border-left: none; }
+#keyword { width: 300px; }
+#fetcher { width: 500px; }
+#keyword, #go { font-size: 1.5em; }
+#text { width: 100%; height: 100px; }
+p.copy { font-size: small; }
+#form { font-size: small; position: relative; }
+hr { border: none; border-bottom: solid #ccc 1px; }
+a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; }
+#angles line, #angles path, #angles circle { stroke: #666; }
+#angles text { fill: #333; }
+#angles path.drag { fill: #666; cursor: move; }
+#angles { text-align: center; margin: 0 auto; width: 350px; }
+#angles input, #max { width: 42px; }
+h1 { color:#fff; }
+#form { visibility:hidden; } */
+h1 { color:#fff; }
+
+#left-col{
+  padding-top: 50px;
+}
+
+.tweetHolder{
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid white;
+  animation: 0.3s ease-in;
+}
+
+
+.tweetUserName{
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+}
+.tweetUserName.big{
+  font-size:32px;
+}
+
+.tweetScreenName{
+  color:#fff;
+  font-size:11px;
+}
+.tweetScreenName.big{
+  font-size:28px;
+}
+
+.tweetText{
+  color:#fff;
+  font-size:16px;
+}
+.tweetText.big{
+  font-size:36px;
+}
